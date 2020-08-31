@@ -3,7 +3,7 @@ function login() {
     const username = $("#username").val().trim();
     const password = $("#password").val().trim();
     if (username === "" || password === "") {
-        $(".modal-body").html("用户名或者密码不能为空!!请检查用户名或者密码");
+        $(".modal-body").html("用户名或者密码不能为空");
         $('#loginModal').modal('show');
         return;
     }
