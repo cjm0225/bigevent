@@ -49,3 +49,48 @@ $("#exampleInputFile").change(function (e) {
     // 显示预览图片
     $("#userPic").prop("src", url);
 });
+
+
+// 实现用户修改信息功能
+function userInfoModify() {
+    //因为formData是DOM原生对象，所以要获取DOM元素
+    const form = $("#form")[0];
+    const formData = new FormData(form);
+    request({
+        type: "post",
+        url: "/admin/user/edit",
+        data: formData,
+        contentType: false,
+        processData: false,
+        success: function (response) {
+            if (response.code === 200) {
+                window.alert(response.msg);
+            }
+        }
+    });
+    return false;
+}
+// $('.btn-edit').on('click', (e) => {
+//     e.preventDefault();
+//     // 3、收集编辑信息并提交给服务端
+//     // 3.1 服务端需要使用FromData的数据类型，那我们就可以利用FromData对象自动收集表单数据了
+//     const from = $('#form')[0]; // 把jq对象转换为普通对象
+//     // 3.2 创建formdata对象，把表单作为参数参数，会自动收集具有name属性的input字段
+//     const formdata = new FormData(form);
+//     // 3.3 发送请求
+//     request(
+//         {
+//             type: "post",
+//             url: "/admin/user/edit",
+//             data: formdata,
+//             contentType: false,
+//             processData: false,
+//             success: function (response) {
+//                 if (response.code === 200) {
+//                     alert(response.msg);
+//                 }
+//             }
+
+//         }
+//     )
+// });
