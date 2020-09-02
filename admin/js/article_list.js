@@ -36,3 +36,30 @@ function article_search() {
 
 article_search();
 
+// 点击发表文章，跳转到发表文章的页面
+$("#release_btn").click(function (e) {
+    e.preventDefault();
+    window.location.href = "./article_edit.html";
+});
+
+// 使用事件委托，给删除按钮绑定点击事件,实现删除文章功能
+$(".table tbody").on("click", ".delete", function () {
+    const id = Number($(this).parents("tr").attr("data-id"));
+    if (confirm("确认要删除吗?")) {
+        request({
+            type: "post",
+            url: "/admin/article/delete",
+            data: { id },
+            success: function (response) {
+                if (response.code === 204) {
+                    article_search();
+                    alert(response.msg);
+
+                } else if (response.code === 400) {
+                    alert(response.msg);
+                }
+            }
+        });
+
+    }
+});
