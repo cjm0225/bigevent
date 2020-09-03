@@ -1,7 +1,7 @@
 
 /**
  * 封装一个http请求函数
- * @param {Object} requestObj ajax请求配置{type，url，data，dataType,success}
+ * @param {Object} requestObj ajax请求配置{type，url，data，dataType,success,processData,contentType}
  */
 
 //  ajax请求接口的ip地址

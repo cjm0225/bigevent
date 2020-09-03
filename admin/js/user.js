@@ -1,4 +1,3 @@
-
 // 获取用户信息
 function getUserDetail() {
     request({
@@ -20,77 +19,45 @@ function getUserDetail() {
 }
 getUserDetail();
 
-
-// // 用户图片编辑显示预览(读取本地文件的方法)
-// $("#exampleInputFile").change(function (e) {
-//     e.preventDefault();
-//     // 原生dom元素input中有files属性，是一个数组，存储一个或者多个文件信息(file对象)
-//     let localFile = $("#exampleInputFile")[0].files[0];
-
-//     // FileReader对象允许Web应用程序异步读取存储在用户计算机上的文件
-//     let reader = new FileReader();
-
-//     // 以url格式读取文件信息，无返回值
-//     reader.readAsDataURL(localFile, "UTF-8");
-
-//     // onload事件表示读取文件完成
-//     reader.onload = function (event) {
-//         $("#userPic").prop("src", event.target.result);
-//     }
-// });
-
-// 使用URL.createObectUrl（）方法实现图片编辑显示预览
+// 实现图片上传预览功能
 $("#exampleInputFile").change(function (e) {
     e.preventDefault();
-    // 原生dom元素input中有files属性，是一个数组，存储一个或者多个文件信息(file对象)
-    let file = $("#exampleInputFile")[0].files[0];
-    // 使用URL.createObjectURL临时创建url，生存期绑定到创建该文档的窗口中的文档（就是说网页关闭时就无效或者说是被清除）
+
+    // 获取表单type=file元素的flies对象
+    const file = $("#exampleInputFile")[0].files[0];
+
+    // 用URL.createObjectURL创建一个url，生命周期与浏览器一样，关闭浏览器就释放,返回一个字符串编码，用于储存file信息
     const url = URL.createObjectURL(file);
-    // 显示预览图片
+
+    // 浏览器的图片属性src可以解析特殊编码格式
     $("#userPic").prop("src", url);
 });
 
+// 实现用户信息修改功能
+$(".btn-success").click(function (e) {
+    e.preventDefault();
 
-// 实现用户修改信息功能
-function userInfoModify() {
-    //因为formData是DOM原生对象，所以要获取DOM元素
-    const form = $("#form")[0];
-    const formData = new FormData(form);
+    // 获取表单的formData对象,参数为form元素,因为是原生API，所以参数只能接收原生DOM元素
+    const formdata = new FormData($("#form")[0]);
+
+    // for of 可以遍历formdata对象，查看是否成功获取表单信息
+    // for (key of formdata) {
+    //     console.log(key);
+    // }
+
+    // 发送ajax请求
     request({
         type: "post",
         url: "/admin/user/edit",
-        data: formData,
+        data: formdata,
         contentType: false,
         processData: false,
         success: function (response) {
             if (response.code === 200) {
-                window.alert(response.msg);
+                // 不同源的父页面和子页面之间会有跨域问题，如果是同源页面，则可以父页面和子页面交互
+                parent.window.location.reload();
+                alert(response.msg);
             }
         }
     });
-    return false;
-}
-// $('.btn-edit').on('click', (e) => {
-//     e.preventDefault();
-//     // 3、收集编辑信息并提交给服务端
-//     // 3.1 服务端需要使用FromData的数据类型，那我们就可以利用FromData对象自动收集表单数据了
-//     const from = $('#form')[0]; // 把jq对象转换为普通对象
-//     // 3.2 创建formdata对象，把表单作为参数参数，会自动收集具有name属性的input字段
-//     const formdata = new FormData(form);
-//     // 3.3 发送请求
-//     request(
-//         {
-//             type: "post",
-//             url: "/admin/user/edit",
-//             data: formdata,
-//             contentType: false,
-//             processData: false,
-//             success: function (response) {
-//                 if (response.code === 200) {
-//                     alert(response.msg);
-//                 }
-//             }
-
-//         }
-//     )
-// });
+});
