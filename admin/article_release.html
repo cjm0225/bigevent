@@ -10,10 +10,16 @@
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/iconfont.css">
     <link rel="stylesheet" href="css/main.css">
+    <!-- 引入时间插件CSS -->
+    <link rel="stylesheet" href="./libs/jedate/css/jedate.css">
     <!-- jq -->
     <script src="./libs/jquery-1.12.4.min.js"></script>
     <!-- 模板引擎 -->
     <script src="./libs/template-web.js"></script>
+    <!-- 引入时间插件js -->
+    <script src="./libs/jedate/js/jedate.js"></script>
+    <!-- 1、引入富文本插件JS -->
+    <script src="./libs/tinymce/tinymce.min.js"></script>
 </head>
 
 <body>
@@ -51,11 +57,15 @@
                 <div class="form-group">
                     <label class="col-sm-2 control-label">发布时间：</label>
                     <div class="col-sm-4">
+                        <!-- 插入时间插件的显示元素 -->
+                        <input type="text" id="myDate" placeholder="请选择时间" readonly>
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="inputEmail3" class="col-sm-2 control-label">文章内容：</label>
                     <div class="col-sm-10">
+                        <!-- 2、定义富文本元素 -->
+                        <div id="richText"></div>
                     </div>
                 </div>
                 <div class="form-group">
@@ -68,5 +78,7 @@
         </div>
     </div>
 </body>
+<!-- 引入外部JS资源 -->
+<script src="./js/article_release.js"></script>
 
 </html>
