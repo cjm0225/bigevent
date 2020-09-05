@@ -18,8 +18,9 @@
     <script src="./libs/template-web.js"></script>
     <!-- 引入时间插件js -->
     <script src="./libs/jedate/js/jedate.js"></script>
-    <!-- 1、引入富文本插件JS -->
+    <!-- 引入富文本插件JS -->
     <script src="./libs/tinymce/tinymce.min.js"></script>
+
 </head>
 
 <body>
@@ -45,12 +46,7 @@
                 <div class="form-group">
                     <label for="inputCategory" class="col-sm-2 control-label">文章类别：</label>
                     <div class="col-sm-4">
-                        <select class="form-control category" name="categoryId">
-                            <option>类别一</option>
-                            <option>类别二</option>
-                            <option>类别三</option>
-                            <option selected>类别四</option>
-                            <option>类别五</option>
+                        <select class="form-control category" name="categoryId" id="categoryId">
                         </select>
                     </div>
                 </div>
@@ -78,6 +74,13 @@
         </div>
     </div>
 </body>
+<Script type="text/html" id="categoryHTML">
+    {{each data}}
+    <option value="{{$value.id}}">{{$value.name}}</option>
+    {{/each}}
+</Script>
+
+<script src="./js/http.js"></script>
 <!-- 引入外部JS资源 -->
 <script src="./js/article_release.js"></script>
 
