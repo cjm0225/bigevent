@@ -26,16 +26,16 @@ function request(requestObj) {
         headers: {
             Authorization: token
         },
-        error: function (response) {
+        error: function (XMLHttpRequest, textStatus) {
             // 当请求被拒绝的时候，表示未登录或者token凭证已过期
-            if (response.status === 403) {
+            if (XMLHttpRequest.status === 403) {
                 alert("您还没登录，请先登录");
                 // 清除token
                 window.localStorage.removeItem("bigevent_token");
                 //跳转到登录页面
                 window.location.href = "./login.html";
-            } else if (response.status === 400) {
-                alert(response.responseJSON.msg);
+            } else if (XMLHttpRequest.status === 400) {
+                alert(XMLHttpRequest.responseJSON.msg);
             }
         }
     });

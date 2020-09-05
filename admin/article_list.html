@@ -76,12 +76,12 @@
     <option value="">所有分类</option>
     <!-- 遍历数组 -->
     {{each data}}
-<option value="{{$value.name}}">{{$value.name}}</option>
+<option value="{{$value.name}}" data-id="{{$value.id}}">{{$value.name}}</option>
 {{/each}}
 </script>
 
 <script id="article_list" type="text/html">
-    {{each dataObj}}
+    {{each data}}
     <tr data-id={{$value.id}}>
         <td>{{$value.title}}</td>
         <td>{{$value.author}}</td>
