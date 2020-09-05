@@ -37,3 +37,59 @@ $("#inputCover").change(function () {
     //渲染显示
     $(".article_cover").prop("src", url);
 })
+
+// 实现发表文章功能
+function publishArticle(data) {
+    request({
+        type: "post",
+        url: "/admin/article/publish",
+        data: data,
+        contentType: false,
+        processData: false,
+        success: function (response) {
+            if (response.code === 200) {
+                alert(response.msg);
+                parent.window.alert("操作");
+            }
+        }
+    });
+}
+
+// 发布文章
+$(".btn-release").click(function (e) {
+    e.preventDefault();
+    // 新建一个formdata对象，formdata对象可以获取表单数据
+    const formData = new FormData($("#form")[0]);
+
+
+    formData.append("state", "已发布");
+    formData.delete("richText")
+
+    // 获取富文本内容
+    const content = tinymce.activeEditor.getContent();
+    formData.append("content", content);
+
+    // 发送请求
+    publishArticle(formData);
+});
+
+// 将文章存为草稿
+$(".btn-draft").click(function (e) {
+    e.preventDefault();
+    e.preventDefault();
+    // 新建一个formdata对象，formdata对象可以获取表单数据
+    const formData = new FormData($("#form")[0]);
+
+    // 增加表单数据
+    formData.append("state", "草稿");
+    // 删除多余的表单数据
+    formData.delete("richText")
+
+    // 获取富文本内容
+    const content = tinymce.activeEditor.getContent();
+    formData.append("content", content);
+
+    // 发送请求
+    publishArticle(formData);
+
+});
