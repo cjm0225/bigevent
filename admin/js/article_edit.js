@@ -118,13 +118,6 @@ $(".btn-release").click(function (e) {
     // 发送请求
     // publishArticle(formData);
 
-    // var base64 = getBase64Image(image);
-    // console.log(base64)
-    // var newFile = dataURLtoFile(base64, 'img111');
-    // console.log(newFile)
-    // demoImg.src = base64.dataURL;
-    // var blob = convertBase64UrlToBlob(base64);
-    // console.log(blob);
 });
 
 // 将文章存为草稿

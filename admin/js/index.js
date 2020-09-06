@@ -43,3 +43,9 @@ $(".level01").eq(1).click(function () {
     $(".level02").stop().slideToggle();
     $(".level01 b").toggleClass("rotate0");
 });
+
+// $(window).unload(function () {
+//     // 清除token
+//     window.localStorage.removeItem("bigevent_token");
+
+// });

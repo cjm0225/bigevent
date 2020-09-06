@@ -62,7 +62,7 @@ $(".btn-release").click(function (e) {
     const formData = new FormData($("#form")[0]);
 
 
-    formData.append("state", "已发布");
+    formData.append("state",);
     formData.delete("richText")
 
     // 获取富文本内容
