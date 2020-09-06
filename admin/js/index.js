@@ -44,8 +44,9 @@ $(".level01").eq(1).click(function () {
     $(".level01 b").toggleClass("rotate0");
 });
 
-// $(window).unload(function () {
+// window.onbeforeunload = function () {
 //     // 清除token
 //     window.localStorage.removeItem("bigevent_token");
 
-// });
+// }
+
