@@ -12,7 +12,7 @@ function request(requestObj) {
     const token = window.localStorage.getItem("bigevent_token");
 
     // 解构所需属性,type和url,success不能为空，data根据接口需求可以为空，dataType为空时，ajax函数自动识别，processData和contentType使用默认值，当undefined时，使用默认值。当输入值时，使用传入的参数
-    const { type, url, data, dataType, success, processData = true, contentType = 'application/x-www-form-urlencoded' } = requestObj;
+    const { type, url, data, dataType, success, processData = true, contentType = 'application/x-www-form-urlencoded', async = true } = requestObj;
 
     $.ajax({
         type: type,
@@ -22,6 +22,7 @@ function request(requestObj) {
         processData: processData,
         contentType: contentType,
         success: success,
+        async: async,
         // token凭证在请求头中发送到服务器
         headers: {
             Authorization: token

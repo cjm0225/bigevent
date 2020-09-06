@@ -51,6 +51,7 @@ function article_query(paramObj) {
                     onPageClick: function (e, page) {
                         // 因为插件的onPageClick方法会在初始化的时候就会自动调用一次这个函数，根据情况不需要第一次就获取数据，所以第一次要关闭获取数据
                         if (global.bol) {
+
                             // 把被点击的页数保存在全局变量中，以便于后面的获取
                             global.page = page;
 
@@ -88,22 +89,19 @@ article_query({});
 
 // 根据文章类型id和文章状态搜索文章
 $("#btnSearch").click(function (e) {
+
     // 由于twbsPagination.js插件在再次请求数据时不刷新页数，需要把上一次初始化数据清空并解绑，再次请求重新初始化twbsPagination.js就可以解决页数不刷新的问题了
     $('#pagination').empty();
     $('#pagination').removeData('twbs-pagination');
     $('#pagination').unbind('page');
 
     e.preventDefault();
-    // 不能用return停止搜索全部,使用for循坏可以减少查询次数
-    let categoryId;
-    $("#selCategory option").each(function () {
-        if ($(this).prop("selected") === true) {
-            categoryId = $(this).attr("data-id");
-        }
 
-    });
-    const type = categoryId;
+    // 下拉框可以直接获取value值就可以直接得到被选中的选项的value值,但是又读取优先级，属性value值优先级比内容value优先级高
+    // <option value="value" >value</option>
+    const type = $("#selCategory").val();
     const state = $("#selStatus").val();
+
     article_query({ type, state });
 });
 
@@ -116,18 +114,12 @@ function deleteArticle(id) {
         success: function (response) {
             if (response.code === 204) {
 
-
-                let categoryId;
-                $("#selCategory option").each(function () {
-                    if ($(this).prop("selected") === true) {
-                        categoryId = $(this).attr("data-id");
-                    }
-
-                });
-
-                const type = categoryId;
+                // 下拉框可以直接获取value值就可以直接得到被选中的选项的value值,但是又读取优先级，属性value值优先级比内容value优先级高
+                // <option value="value" >value</option>
+                const type = $("#selCategory").val();
                 const state = $("#selStatus").val();
 
+                // 点击分页之后保存的页数，在删除文章的时候，记住现页数，重新渲染的时候就渲染现页数
                 const page = global.page;
 
                 // 删除文章的时候，希望当前数据是在删除页中重新渲染

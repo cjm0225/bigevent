@@ -70,7 +70,7 @@
     <option value="">所有分类</option>
     <!-- 遍历数组 -->
     {{each data}}
-<option value="{{$value.name}}" data-id="{{$value.id}}">{{$value.name}}</option>
+<option value="{{$value.id}}" data-id="{{$value.id}} ">{{$value.name}}</option>
 {{/each}}
 </script>
 
@@ -83,7 +83,7 @@
         <td class="text-center">{{$value.date}}</td>
         <td class="text-center">{{$value.state}}</td>
         <td class="text-center">
-            <a href="article_edit.html?id={{$value.id}}" class="btn btn-default btn-xs">编辑</a>
+            <a href="article_edit.html?id={{$value.id}}&state={{$value.state}}" class="btn btn-default btn-xs">编辑</a>
             <a href="javascript:void(0);" class="btn btn-danger btn-xs delete">删除</a>
         </td>
     </tr>
