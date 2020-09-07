@@ -15,7 +15,8 @@ function login() {
             if (response.code === 200) {
                 console.log(response.msg);
                 // 将token存入到本地内地，方便每次获取数据库权限的时候进行权限认证
-                window.localStorage.setItem("bigevent_token", response.token);
+                // window.localStorage.setItem("bigevent_token", response.token);
+                window.sessionStorage.setItem("bigevent_token", response.token);
                 window.location.href = "./index.html";
             } else {
                 $(".modal-body").text(response.msg);

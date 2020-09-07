@@ -1,6 +1,4 @@
 
-// 获取token，在每次获取权限的时候验证是否已经登录过
-const token = window.localStorage.getItem("bigevent_token");
 
 // 获取用于信息
 function getUserinfo() {
@@ -25,7 +23,8 @@ getUserinfo();
 // 退出系统功能
 function logout() {
     // 清除token
-    window.localStorage.removeItem("bigevent_token");
+    // window.localStorage.removeItem("bigevent_token");
+    window.sessionStorage.removeItem("bigevent_token");
     //跳转到登录页面
     window.location.href = "./login.html";
 }

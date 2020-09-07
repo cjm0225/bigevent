@@ -9,7 +9,9 @@ const BASE_URL = "http://localhost:8080/api/v1";
 
 function request(requestObj) {
     // 每次请求自动获取token凭证，用于后台验证用户是否已经登录过了
-    const token = window.localStorage.getItem("bigevent_token");
+    // const token = window.localStorage.getItem("bigevent_token");
+    // sessionStorage，会话储存，在关闭页面后自动清除。生命周期：页面开始到页面关闭
+    const token = window.sessionStorage.getItem("bigevent_token");
 
     // 解构所需属性,type和url,success不能为空，data根据接口需求可以为空，dataType为空时，ajax函数自动识别，processData和contentType使用默认值，当undefined时，使用默认值。当输入值时，使用传入的参数
     const { type, url, data, dataType, success, processData = true, contentType = 'application/x-www-form-urlencoded', async = true } = requestObj;
